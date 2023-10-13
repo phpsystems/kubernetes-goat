@@ -1,5 +1,7 @@
 ---
-sidebar_label: ☸️ Kubernetes
+sidebar_position: 1
+title: ☸️ Kubernetes
+slug: kubernetes-goat-on-kubernetes
 ---
 
 # ☸️ Kubernetes - Standard Cluster
@@ -34,4 +36,4 @@ cd kubernetes-goat
 bash setup-kubernetes-goat.sh
 ```
 
-* Now we have the Kubernetes Goat setup up and running, refer to [Getting Started for next steps](../getting-started)
+* Now we have the Kubernetes Goat setup up and running, refer to [Getting Started for next steps](../getting-started.md)

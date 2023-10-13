@@ -1,5 +1,7 @@
 ---
-sidebar_label: ☸️ KiND
+sidebar_position: 2
+title: ☸️ KIND
+slug: kubernetes-goat-on-kind
 ---
 
 # ☸️ KiND - Kubernetes IN Docker
@@ -35,4 +37,4 @@ cd kubernetes-goat/platforms/kind-setup
 bash setup-kind-cluster-and-goat.sh
 ```
 
-* Now we have the Kubernetes Goat setup up and running, refer to [Getting Started for next steps](../getting-started)
+* Now we have the Kubernetes Goat setup up and running, refer to [Getting Started for next steps](../getting-started.md)
